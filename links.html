@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[МАСТЕР] - Наши контакты</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;800&family=Montserrat:wght@900&display=swap');
+
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Manrope', sans-serif;
+            margin: 0;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 60px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            font-weight: 800;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .links-container {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .link-card {
+            display: block;
+            background-color: #fff;
+            color: #111;
+            text-decoration: none;
+            padding: 30px 20px;
+            border: 4px solid #fff;
+            box-shadow: 8px 8px 0 #444;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .link-card:hover,
+        .link-card:active {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0 #444;
+        }
+
+        .link-title {
+            font-size: 24px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .link-sub {
+            font-size: 15px;
+            font-weight: 800;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        /* Account 2 styling - inverted for visual interest */
+        .link-card.inverted {
+            background-color: #111;
+            color: #fff;
+            border: 4px solid #fff;
+            box-shadow: 8px 8px 0 #fff;
+        }
+
+        .link-card.inverted .link-sub {
+            color: #aaa;
+        }
+
+        .footer {
+            margin-top: auto;
+            padding-top: 80px;
+            font-size: 14px;
+            font-weight: 800;
+            color: #444;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="logo">[МАСТЕР]</div>
+    <div class="subtitle">Частная бригада</div>
+
+    <div class="links-container">
+        <!-- Аккаунт 1 -->
+        <a href="https://www.avito.ru/tver/predlozheniya_uslug/master_na_chas_sborka_mebeli_melkiy_remont_8217904893"
+            class="link-card" target="_blank">
+            <div class="link-title">АВИТО — ПРОФИЛЬ 1</div>
+            <div class="link-sub">Мастер на час / Сборка мебели / Мелкий ремонт</div>
+        </a>
+
+        <!-- Аккаунт 2 -->
+        <a href="https://www.avito.ru/tver/predlozheniya_uslug/sborschik_mebeli_master_na_chas_8310667161"
+            class="link-card inverted" target="_blank">
+            <div class="link-title">АВИТО — ПРОФИЛЬ 2</div>
+            <div class="link-sub">Сборщик мебели / Мастер на час / Мелкий ремонт</div>
+        </a>
+
+        <!-- Аккаунт 3 -->
+        <a href="https://www.avito.ru/tver/predlozheniya_uslug/melkiy_remont_master_na_chas_sborka_mebeli_8280716859"
+            class="link-card" target="_blank">
+            <div class="link-title">АВИТО — ПРОФИЛЬ 3</div>
+            <div class="link-sub">Мелкий ремонт / Мастер на час / Сборка мебели</div>
+        </a>
+    </div>
+
+    <div class="footer">
+        © 2026 Мастер на час. Политика конфиденциальности. Production: [master] digital
+    </div>
+
+</body>
+
+</html>
