@@ -9,7 +9,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;800&family=Montserrat:wght@900&display=swap');
 
         body {
-            background-color: #111;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #0f0f0f);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: #fff;
             font-family: 'Manrope', sans-serif;
             margin: 0;
@@ -18,6 +20,25 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Staggered entrance animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .logo {
@@ -27,6 +48,8 @@
             letter-spacing: -2px;
             margin-bottom: 10px;
             text-align: center;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
         }
 
         .subtitle {
@@ -37,6 +60,8 @@
             text-transform: uppercase;
             margin-bottom: 60px;
             text-align: center;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+            opacity: 0;
         }
 
         .links-container {
@@ -55,14 +80,41 @@
             padding: 30px 20px;
             border: 4px solid #fff;
             box-shadow: 8px 8px 0 #444;
-            transition: all 0.2s ease;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
             text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        .link-card:hover,
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #111;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: -1;
+        }
+
+        .link-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0 #444;
+            color: #fff;
+            border-color: #111;
+        }
+
+        .link-card:hover::before {
+            transform: scaleY(1);
+            transform-origin: top;
+        }
+
         .link-card:active {
-            transform: translate(4px, 4px);
-            box-shadow: 4px 4px 0 #444;
+            transform: translate(2px, 2px);
+            box-shadow: 6px 6px 0 #444;
         }
 
         .link-title {
@@ -71,6 +123,19 @@
             text-transform: uppercase;
             letter-spacing: -1px;
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .link-arrow {
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .link-card:hover .link-arrow {
+            transform: translateX(10px);
         }
 
         .link-sub {
@@ -87,10 +152,33 @@
             border: 4px solid #fff;
             box-shadow: 8px 8px 0 #fff;
         }
-
+        .link-card.inverted::before {
+            background-color: #fff;
+        }
+        .link-card.inverted:hover {
+            color: #111;
+            border-color: #fff;
+            box-shadow: 12px 12px 0 #fff;
+        }
+        .link-card.inverted:active {
+            box-shadow: 6px 6px 0 #fff;
+        }
         .link-card.inverted .link-sub {
             color: #aaa;
+            transition: color 0.3s ease;
         }
+        .link-card.inverted:hover .link-sub {
+            color: #555;
+        }
+        
+        .link-card:hover .link-sub {
+            color: #aaa;
+        }
+
+        /* Stagger delays for links */
+        .link-card:nth-child(1) { animation-delay: 0.2s; }
+        .link-card:nth-child(2) { animation-delay: 0.3s; }
+        .link-card:nth-child(3) { animation-delay: 0.4s; }
 
         .footer {
             margin-top: auto;
@@ -99,11 +187,46 @@
             font-weight: 800;
             color: #444;
             text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Massive Background Marquee */
+        .bg-marquee {
+            position: fixed;
+            top: 50%;
+            left: -50%;
+            width: 200%;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 200px;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 3px rgba(255, 255, 255, 0.05);
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            text-transform: uppercase;
+            animation: scrollMarquee 40s linear infinite;
+        }
+
+        @keyframes scrollMarquee {
+            0% { transform: translateY(-50%) rotate(-10deg) translateX(0); }
+            100% { transform: translateY(-50%) rotate(-10deg) translateX(-30%); }
+        }
+
+        .links-container, .logo, .subtitle {
+            position: relative;
+            z-index: 10;
         }
     </style>
 </head>
 
 <body>
+    
+    <!-- Фоновая бегущая строка -->
+    <div class="bg-marquee">МАСТЕР НА ЧАС • СБОРКА МЕБЕЛИ • ЭЛЕКТРИКА И САНТЕХНИКА • МАСТЕР НА ЧАС • СБОРКА МЕБЕЛИ • ЭЛЕКТРИКА И САНТЕХНИКА</div>
 
     <div class="logo">[МАСТЕР]</div>
     <div class="subtitle">Частная бригада</div>
@@ -112,21 +235,21 @@
         <!-- Аккаунт 1 -->
         <a href="https://www.avito.ru/tver/predlozheniya_uslug/master_na_chas_sborka_mebeli_melkiy_remont_8217904893"
             class="link-card" target="_blank">
-            <div class="link-title">АВИТО — ПРОФИЛЬ 1</div>
+            <div class="link-title">АВИТО — ПРОФИЛЬ 1 <span class="link-arrow">→</span></div>
             <div class="link-sub">Мастер на час / Сборка мебели / Мелкий ремонт</div>
         </a>
 
         <!-- Аккаунт 2 -->
         <a href="https://www.avito.ru/tver/predlozheniya_uslug/sborschik_mebeli_master_na_chas_8310667161"
             class="link-card inverted" target="_blank">
-            <div class="link-title">АВИТО — ПРОФИЛЬ 2</div>
+            <div class="link-title">АВИТО — ПРОФИЛЬ 2 <span class="link-arrow">→</span></div>
             <div class="link-sub">Сборщик мебели / Мастер на час / Мелкий ремонт</div>
         </a>
 
         <!-- Аккаунт 3 -->
         <a href="https://www.avito.ru/tver/predlozheniya_uslug/melkiy_remont_master_na_chas_sborka_mebeli_8280716859"
             class="link-card" target="_blank">
-            <div class="link-title">АВИТО — ПРОФИЛЬ 3</div>
+            <div class="link-title">АВИТО — ПРОФИЛЬ 3 <span class="link-arrow">→</span></div>
             <div class="link-sub">Мелкий ремонт / Мастер на час / Сборка мебели</div>
         </a>
     </div>
